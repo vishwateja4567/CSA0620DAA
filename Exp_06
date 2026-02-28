@@ -1,0 +1,21 @@
+// 6. Sort Then Find Maximum
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int main() {
+    int arr[] = {5,3,8,1};
+    int n = 4;
+
+    if(n == 0) {
+        printf("List is empty");
+        return 0;
+    }
+
+    qsort(arr, n, sizeof(int), compare);
+
+    printf("%d", arr[n-1]);
+}
