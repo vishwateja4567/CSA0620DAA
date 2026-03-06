@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+int countLive(int board[10][10],int m,int n,int x,int y)
+{
+    int count=0;
+
+    for(int i=-1;i<=1;i++)
+    {
+        for(int j=-1;j<=1;j++)
+        {
+            if(i==0 && j==0) continue;
+
+            int r=x+i;
+            int c=y+j;
+
+            if(r>=0 && r<m && c>=0 && c<n && board[r][c]==1)
+                count++;
+        }
+    }
+
+    return count;
+}
+
+void gameOfLife(int board[10][10],int m,int n)
+{
+    int temp[10][10];
+
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            int live=countLive(board,m,n,i,j);
+
+            if(board[i][j]==1 && (live<2 || live>3))
+                temp[i][j]=0;
+            else if(board[i][j]==0 && live==3)
+                temp[i][j]=1;
+            else
+                temp[i][j]=board[i][j];
+        }
+    }
+
+    for(int i=0;i<m;i++)
+        for(int j=0;j<n;j++)
+            board[i][j]=temp[i][j];
+}
+
+int main()
+{
+    int board[10][10]={{0,1,0},{0,0,1},{1,1,1},{0,0,0}};
+    int m=4,n=3;
+
+    gameOfLife(board,m,n);
+
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+            printf("%d ",board[i][j]);
+        printf("\n");
+    }
+}
