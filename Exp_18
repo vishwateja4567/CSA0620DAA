@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+void selectionSort(int arr[], int n) {
+    int i, j, min, temp;
+
+    for(i = 0; i < n-1; i++) {
+        min = i;
+        for(j = i+1; j < n; j++) {
+            if(arr[j] < arr[min])
+                min = j;
+        }
+
+        temp = arr[i];
+        arr[i] = arr[min];
+        arr[min] = temp;
+    }
+}
+
+void printArray(int arr[], int n) {
+    int i;
+    printf("[");
+    for(i=0;i<n;i++) {
+        printf("%d",arr[i]);
+        if(i<n-1) printf(", ");
+    }
+    printf("]\n");
+}
+
+int main() {
+
+    int arr1[] = {};
+    int arr2[] = {1};
+    int arr3[] = {7,7,7,7};
+    int arr4[] = {-5,-1,-3,-2,-4};
+
+    int n2=1,n3=4,n4=5;
+
+    selectionSort(arr2,n2);
+    selectionSort(arr3,n3);
+    selectionSort(arr4,n4);
+
+    printf("Test1: []\n");
+
+    printf("Test2: ");
+    printArray(arr2,n2);
+
+    printf("Test3: ");
+    printArray(arr3,n3);
+
+    printf("Test4: ");
+    printArray(arr4,n4);
+
+}
