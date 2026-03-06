@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int max(int a,int b)
+{
+    return (a>b)?a:b;
+}
+
+int robLine(int arr[],int n)
+{
+    int prev=0,curr=0,temp;
+
+    for(int i=0;i<n;i++)
+    {
+        temp=curr;
+        curr=max(curr,prev+arr[i]);
+        prev=temp;
+    }
+    return curr;
+}
+
+int rob(int nums[],int n)
+{
+    if(n==1)
+        return nums[0];
+
+    int arr1[n-1],arr2[n-1];
+
+    for(int i=0;i<n-1;i++)
+        arr1[i]=nums[i];
+
+    for(int i=1;i<n;i++)
+        arr2[i-1]=nums[i];
+
+    return max(robLine(arr1,n-1),robLine(arr2,n-1));
+}
+
+int main()
+{
+    int nums1[]={2,3,2};
+    int nums2[]={1,2,3,1};
+
+    printf("%d\n",rob(nums1,3));
+    printf("%d\n",rob(nums2,4));
+}
