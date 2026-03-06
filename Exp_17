@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+double champagneTower(int poured,int query_row,int query_glass)
+{
+    double dp[101][101]={0};
+
+    dp[0][0]=poured;
+
+    for(int r=0;r<100;r++)
+    {
+        for(int c=0;c<=r;c++)
+        {
+            double overflow=(dp[r][c]-1.0)/2.0;
+
+            if(overflow>0)
+            {
+                dp[r+1][c]+=overflow;
+                dp[r+1][c+1]+=overflow;
+            }
+        }
+    }
+
+    if(dp[query_row][query_glass]>1)
+        return 1;
+
+    return dp[query_row][query_glass];
+}
+
+int main()
+{
+    printf("%.2lf\n",champagneTower(1,1,1));
+    printf("%.2lf\n",champagneTower(2,1,1));
+}
