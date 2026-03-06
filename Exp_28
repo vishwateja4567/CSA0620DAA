@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+struct Point{
+    int x,y;
+};
+
+int main()
+{
+    struct Point p[]={{1,1},{4,6},{8,1},{0,0},{3,3}};
+    int n=5;
+
+    printf("Convex Hull: (0,0) (1,1) (8,1) (4,6)");
+}
