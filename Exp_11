@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+int findPaths(int m, int n, int N, int i, int j)
+{
+    int dp[50][50]={0};
+    int temp[50][50];
+    int count=0;
+
+    dp[i][j]=1;
+
+    for(int step=0; step<N; step++)
+    {
+        for(int a=0;a<m;a++)
+            for(int b=0;b<n;b++)
+                temp[a][b]=0;
+
+        for(int r=0;r<m;r++)
+        {
+            for(int c=0;c<n;c++)
+            {
+                if(dp[r][c]>0)
+                {
+                    int val=dp[r][c];
+
+                    int dir[4][2]={{1,0},{-1,0},{0,1},{0,-1}};
+
+                    for(int d=0;d<4;d++)
+                    {
+                        int nr=r+dir[d][0];
+                        int nc=c+dir[d][1];
+
+                        if(nr<0 || nr>=m || nc<0 || nc>=n)
+                            count+=val;
+                        else
+                            temp[nr][nc]+=val;
+                    }
+                }
+            }
+        }
+
+        for(int a=0;a<m;a++)
+            for(int b=0;b<n;b++)
+                dp[a][b]=temp[a][b];
+    }
+
+    return count;
+}
+
+int main()
+{
+    printf("%d\n",findPaths(2,2,2,0,0));
+    printf("%d\n",findPaths(1,3,3,0,1));
+}
