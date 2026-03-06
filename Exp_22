@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int findKthPositive(int arr[], int n, int k)
+{
+    int i=0,missing=1;
+
+    while(k>0)
+    {
+        if(i<n && arr[i]==missing)
+            i++;
+        else
+            k--;
+
+        if(k==0)
+            return missing;
+
+        missing++;
+    }
+}
+
+int main()
+{
+    int arr[]={2,3,4,7,11};
+    int n=5,k=5;
+
+    printf("Missing number: %d",findKthPositive(arr,n,k));
+}
