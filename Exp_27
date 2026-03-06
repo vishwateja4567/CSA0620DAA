@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+struct Point{
+    float x,y;
+};
+
+int main()
+{
+    struct Point p[]={
+        {10,0},{11,5},{5,3},{9,3.5},{15,3},{12.5,7},{6,6.5},{7.5,4.5}
+    };
+
+    int n=8;
+
+    printf("Convex Hull Points:\n");
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            int pos=0,neg=0;
+
+            for(int k=0;k<n;k++)
+            {
+                float val=(p[j].x-p[i].x)*(p[k].y-p[i].y)-
+                          (p[j].y-p[i].y)*(p[k].x-p[i].x);
+
+                if(val>0) pos++;
+                if(val<0) neg++;
+            }
+
+            if(pos==0 || neg==0)
+                printf("(%.1f,%.1f) (%.1f,%.1f)\n",
+                        p[i].x,p[i].y,p[j].x,p[j].y);
+        }
+    }
+}
